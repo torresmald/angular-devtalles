@@ -1,0 +1,49 @@
+<section>
+  <table class="table table-md mt-2 w-full">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Icon</th>
+        <th>Flag</th>
+        <th>Name</th>
+        <th>Capital</th>
+        <th>Population</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (country of countries(); track country.cca2) {
+      <tr class="">
+        <td>{{ country.cca2 }}</td>
+        <td>{{ country.flag }}</td>
+        <td>
+          <img [src]="country.flagSvg" [alt]="country.name" class="w-10" />
+        </td>
+        <td>{{ country.name }}</td>
+        <td>{{ country.capital || 'NO CAPITAL'}}</td>
+        <td>
+          <span class="badge badge-secondary">{{
+            country.population | number : "2.0-0"
+          }}</span>
+        </td>
+        <td>
+          <a [routerLink]="['/country/by', country.cca2]" class="link-primary"
+            >More Info</a
+          >
+        </td>
+      </tr>
+      } @if (errorMessage()) {
+      <tr>
+        <td colspan="8">{{ errorMessage() }}</td>
+      </tr>
+      } @if (isEmpty() && !isLoading()) {
+      <tr>
+        <td colspan="8">No results to show</td>
+      </tr>
+      } @if (isLoading()) {
+      <tr>
+        <td colspan="8">Loading</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</section>

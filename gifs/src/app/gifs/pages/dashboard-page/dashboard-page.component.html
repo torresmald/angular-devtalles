@@ -1,0 +1,12 @@
+<div
+  class="bg-slate-100 overflow-y-scroll w-screen h-screen antialiased text-slate-300 selection:bg-blue-600 selection:text-white"
+>
+  <div class="flex relative w-screen">
+    <!-- Sidebar -->
+    <app-gifs-side-menu />
+    <!-- Main Content -->
+    <div class="ml-64 flex-1 p-4 text-slate-600">
+      <router-outlet />
+    </div>
+  </div>
+</div>

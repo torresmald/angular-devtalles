@@ -1,0 +1,6 @@
+@if (countryResource.error()) {
+  <app-not-found />
+} @else if(countryResource.value()![0]) {
+  <app-country-details [country]="country()"/>
+}
+

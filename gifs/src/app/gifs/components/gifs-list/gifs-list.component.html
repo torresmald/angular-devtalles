@@ -1,0 +1,14 @@
+@if (gifs().length > 0) {
+<div
+  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+
+>
+  @for (gif of gifs(); track $index) {
+  <app-gifs-list-item [gif]="gif" />
+  }
+</div>
+} @else {
+<h2 class="mt-5 font-bold text-red-400 text-center w-full text-2xl">
+  Find a Gif
+</h2>
+}

@@ -1,0 +1,10 @@
+
+<app-country-search (emittedCountry)="query.set($event)" placeholder="By Capital"/>
+
+
+  <app-country-list [countries]="countryResource.value()!"
+  [errorMessage]="countryResource.error()"
+  [isEmpty]="countryResource.value()?.length === 0"
+  [isLoading]="countryResource.isLoading()"
+  />
+

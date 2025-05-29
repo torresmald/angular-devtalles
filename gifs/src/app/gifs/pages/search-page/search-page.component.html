@@ -1,0 +1,17 @@
+<div class="h-screen flex flex-col">
+  <h2 class="mt-5 font-bold text-2xl">Find Gifs</h2>
+  <h3 class="text-sm text-gray-500">Find by Name</h3>
+
+  <section class="flex flex-col gap-4">
+    <input type="text" placeholder="Find Gifs" class="mt-3 border border-gray-300 rounded-md p-2"
+    (keyup.enter)="searchGifs(txtSearch.value)"
+    #txtSearch
+    [value]="queryString()"
+    >
+  </section>
+
+  <section class="flex-1 overflow-y-auto">
+    <app-gifs-list [gifs]="gifs()" />
+  </section>
+</div>
+
