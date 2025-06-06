@@ -1,0 +1,25 @@
+<div class="mx-5">
+  <h1 class="text-2xl font-bold">Numbers Page</h1>
+  <h3 class="text-xl">Decimal Pipes included in Angular</h3>
+</div>
+<div class="stats shadow mt-5">
+  <div class="stat place-items-center">
+    <div class="stat-title">Numbers</div>
+    <div class="stat-value">{{ decimaNumber() | number:'1.2-2' }}</div>
+    <div class="stat-desc">{{decimaNumber()}}</div>
+  </div>
+
+  <div class="stat place-items-center">
+    <div class="stat-title">Percentage</div>
+    <div class="stat-value text-secondary">{{ pecentage() | percent:'1.2-2' }}</div>
+    <div class="stat-desc text-secondary">{{pecentage()}}</div>
+  </div>
+
+  <div class="stat place-items-center">
+    <div class="stat-title">Currency</div>
+    <div class="stat-value">{{ currency() | currency:'EUR':'symbol':'1.2-2' }}</div>
+    <div class="stat-desc">{{currency()}}</div>
+  </div>
+</div>
+
+

@@ -1,0 +1,54 @@
+<div class="mx-5">
+  <h1 class="text-2xl font-bold">Basic Page</h1>
+  <h3 class="text-xl">Pipes included in Angular</h3>
+</div>
+<div class="stats shadow mt-5 w-full">
+  <div class="stat place-items-center">
+    <div class="stat-title">LowerCase</div>
+    <div class="stat-value">{{ toLowerCase() | lowercase }}</div>
+    <div class="stat-desc">{{ toLowerCase() }}</div>
+  </div>
+
+  <div class="stat place-items-center">
+    <div class="stat-title">Uppercase</div>
+    <div class="stat-value text-secondary">{{ toUpperCase() | uppercase }}</div>
+    <div class="stat-desc text-secondary">{{ toUpperCase() }}</div>
+  </div>
+
+  <div class="stat place-items-center">
+    <div class="stat-title">Capitalize</div>
+    <div class="stat-value">{{ capitalize() | titlecase }}</div>
+    <div class="stat-desc">{{ capitalize() }}</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="shadow mt-5 flex flex-col">
+  <div class="stat place-items-center">
+    <div class="stat-title">Date</div>
+    <div class="stat-value">{{ date() | date : "long" }}</div>
+    <div class="stat-desc">{{ date() }}</div>
+  </div>
+  <div class="stat place-items-center">
+    <div class="stat-title">Date PIPE</div>
+    <div class="stat-value">{{ date() | date : "short" }}</div>
+    <div class="stat-desc">{{ date() }}</div>
+  </div>
+  <div class="stat place-items-center">
+    <div class="stat-title">Date PIPE</div>
+    <div class="stat-value">{{ date() | date : "EEEE d, MMMM" }}</div>
+    <div class="stat-desc">{{ date() }}</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="flex gap-2 ml-2 items-center">
+  <h2 class="text-xl">Locale Actual</h2>
+  <span class="badge badge-info">{{localeService.getLocale() | uppercase}}</span>
+
+  <button class="btn btn-primary" (click)="localeService.changeLocale('fr')">FRANÇAIS</button>
+  <button class="btn btn-primary" (click)="localeService.changeLocale('en')">ENGLISH</button>
+  <button class="btn btn-primary" (click)="localeService.changeLocale('es')">ESPAÑOL</button>
+</div>

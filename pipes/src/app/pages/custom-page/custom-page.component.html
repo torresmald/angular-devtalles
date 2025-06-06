@@ -1,0 +1,66 @@
+<div class="mx-5">
+  <h1 class="text-2xl font-bold">Basic Page</h1>
+  <h3 class="text-xl">Pipes included in Angular</h3>
+</div>
+<div class="stats shadow mt-5 w-full">
+  <div class="stat place-items-center">
+    <div class="stat-title">Transform Pipe</div>
+    <div class="stat-value">{{ name() | transformCase : type() }}</div>
+    <div class="stat-desc">{{ name() }}</div>
+    <button class="btn btn-error" (click)="changeType()">Change Pipe</button>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<section class="m-4">
+  <h1 class="text-primary">Pipes in Action</h1>
+  <div class="flex gap-2 justify-start">
+    <button class="btn btn-primary" (click)="sortBy('name')">By Name</button>
+    <button class="btn btn-accent" (click)="sortBy('canFly')">By Fly</button>
+    <button class="btn btn-secondary" (click)="sortBy('color')">By Color</button>
+    <button class="btn btn-info" (click)="sortBy('creator')">By Creator</button>
+  </div>
+  <input type="text" class="my-4 border border-amber-400 p-2" placeholder="Filter by Name" (input)="searchQuery.set(txtInput.value)" #txtInput>
+</section>
+
+<div class="overflow-x-auto w-full">
+  <div class="table table-xs w-full">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Can fly</th>
+        <th>Color</th>
+        <th>Creator</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (hero of heroes() | filterBy:searchQuery() | sortBy:condition(); track $index) {
+      <tr>
+        <td>
+          {{ hero.id }}
+        </td>
+        <td>
+          {{ hero.name }}
+        </td>
+        <td>
+          <span class="text-xs w-44" [class.text-success]="hero.canFly"
+          [class.text-error]="!hero.canFly"
+          >
+            {{ hero.canFly | canFly }}
+          </span>
+        </td>
+        <td
+          [style.color]="hero.color | colorText"
+        >
+          {{ hero.color | color }}
+        </td>
+        <td>
+          {{ hero.creator | creator }}
+        </td>
+      </tr>
+      }
+    </tbody>
+  </div>
+</div>

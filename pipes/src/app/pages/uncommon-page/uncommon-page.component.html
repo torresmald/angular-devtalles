@@ -1,0 +1,56 @@
+<section class="mx-5 mb-5">
+  <h1 class="text-2xl font-bold">Uncommon Page</h1>
+  <h3 class="text-xl">Uncommon Pipes included in Angular</h3>
+</section>
+
+<section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+  <div class="card bg-base-200 shadow-xl">
+    <div class="card-body">
+      <app-card-component title="Contenido 1">
+        <p>Parrafo 1</p>
+      </app-card-component>
+    </div>
+  </div>
+  <div class="card bg-base-200 shadow-xl">
+    <div class="card-body">
+      <app-card-component title="Contenido 2">
+        <p>Parrafo 2</p>
+      </app-card-component>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+  <div class="card bg-base-200 shadow-xl">
+    <div class="card-body">
+      <app-card-component title="Select Pipe">
+        <p>
+          {{ client().gender | i18nSelect : welcomeMap }} {{ client().name }}
+        </p>
+        <button class="btn btn-accent" (click)="changeClient()">
+          Change Message
+        </button>
+      </app-card-component>
+    </div>
+  </div>
+  <div class="card bg-base-200 shadow-xl">
+    <div class="card-body">
+      <app-card-component title="Plural Pipe">
+        <ul>
+          @for (client of clients(); track $index) {
+          <li>{{ client }}</li>
+          }
+        </ul>
+        <p>
+          Hay {{ clients().length }}
+          {{ clients().length | i18nPlural : messageMapping }} esperando
+        </p>
+        <button class="btn btn-accent" (click)="deleteClient()">
+          Borrar Cliente
+        </button>
+      </app-card-component>
+    </div>
+  </div>
+</section>
