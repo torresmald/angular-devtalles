@@ -1,0 +1,23 @@
+<div #map class="h-[90vh] w-full relative"></div>
+
+<div class="absolute top-20 left-10 flex flex-col gap-2 bg-white p-4">
+  <h2 class="text-lg text-black">Marcadores</h2>
+  @for (marker of markers(); track marker.id; let i = $index) {
+  <div class="flex items-center gap-4" >
+    <input
+      type="radio"
+      name="radio-12"
+      checked="checked"
+      class="radio border-2"
+      [style]="{
+        'background-color': marker.marker._color,
+        'border-color': marker.marker._color,
+        color: marker.marker._color
+      }"
+      (change)="onGoToMarker(marker.marker.getLngLat())"
+    />
+    <span class="text-lg text-blue-400">{{ i + 1 }}</span>
+    <span class="text-red-700 cursor-pointer ml-2" (click)="onRemoveMarker(marker)">Remove</span>
+  </div>
+  }
+</div>

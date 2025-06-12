@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark, night;
+}
+
+@font-face {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 200 700;
+  font-display: swap;
+  src: url("../public/assets/fonts/MontserratAlternates-Medium.ttf")
+    format("woff2");
+}
+
+@theme {
+  --font-Montserrat: "Montserrat";
+  --animate-fadeIn: fadeIn 1s ease-in-out;
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}

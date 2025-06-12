@@ -1,0 +1,15 @@
+<h1 class="text-3xl font-bold font-Montserrat">All Products</h1>
+
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+  @for (product of productsResource.value()?.products; track product.id) {
+    <store-front-product [product]="product" />
+  }@empty {
+    <p>No hay productos</p>
+  }
+</div>
+
+@if (productsResource.value()) {
+  <app-pagination [pages]="productsResource.value()?.pages ?? 1" [currentPage]="paginationService.currentPage()"/>
+}
+

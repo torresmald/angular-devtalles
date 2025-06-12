@@ -1,0 +1,26 @@
+<div
+  class="card bg-base-100 shadow-sm animate-fadeIn min-h-[400px] flex flex-col"
+>
+  <figure class="px-10 pt-10">
+    <img
+      [src]="product().images | productImage"
+      alt="Shoes"
+      class="rounded-xl"
+    />
+  </figure>
+  <div
+    class="card-body items-center text-center **flex-grow flex flex-col justify-between"
+  >
+    <a [routerLink]="['/product', product().slug]">
+      <h2 class="card-title">{{ product().title }}</h2>
+    </a>
+    <p class="max-h-16 overflow-ellipsis overflow-hidden">
+      {{ product().description }}
+    </p>
+    <div class="card-actions mt-auto">
+      <a class="btn btn-primary" [routerLink]="['/product', product().slug]"
+        >More Info</a
+      >
+    </div>
+  </div>
+</div>

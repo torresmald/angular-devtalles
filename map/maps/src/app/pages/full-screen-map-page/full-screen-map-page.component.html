@@ -1,0 +1,8 @@
+<div #map class="h-[90vh] w-full relative"></div>
+<div class="absolute flex flex-col bottom-20 right-5 gap-1.5">
+  <button class="btn btn-accent" (click)="onChangeZoom('add')">+</button>
+  <button class="btn btn-accent" (click)="onChangeZoom('minus')">-</button>
+</div>
+<div class="absolute bottom-46 right-5">
+  <input type="range" min="0" max="19" [value]="zoom()" class="range range-secondary" (change)="onRangeZoom(inputValue.value)" #inputValue/>
+</div>

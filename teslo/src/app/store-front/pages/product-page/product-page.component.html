@@ -1,0 +1,17 @@
+<section class="container mt-5">
+  @if (productResource.isLoading()) {
+  <p>Cargando....</p>
+  } @if (productResource.hasValue()) {
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+    <app-product-slider [images]="productResource.value().images" />
+
+    <div class="flex flex-col gap-3 mt-10">
+      <h2 class="text-xl font-Montserrat font-bold">
+        {{ productResource.value().title }}
+      </h2>
+      <hr />
+      <p>{{ productResource.value().description }}</p>
+    </div>
+  </div>
+  }
+</section>

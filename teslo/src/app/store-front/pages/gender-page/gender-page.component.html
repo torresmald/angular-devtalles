@@ -1,0 +1,15 @@
+<h1 class="text-3xl font-bold font-Montserra text-center text-secondary">{{genderSignal() | uppercase}}
+
+  <span class="text-white">| Products</span>
+</h1>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+  @for (product of productsGenderResource.value()?.products; track product.id) {
+  <store-front-product [product]="product" />
+  }@empty {
+  <p>No hay productos</p>
+  }
+</div>
+
+<app-pagination [pages]="productsGenderResource.value()?.pages ?? 1" [currentPage]="paginationService.currentPage()"/>
+
