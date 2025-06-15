@@ -7,10 +7,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '@/auth/services/auth.service';
+import { AlertComponent } from "../../../shared/components/alert/alert.component";
 
 @Component({
   selector: 'app-login-page',
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, AlertComponent],
   templateUrl: './login-page.component.html',
 })
 export default class LoginPageComponent {
@@ -30,7 +31,6 @@ export default class LoginPageComponent {
       return;
     }
     const { email, password } = this.loginForm.value;
-    console.log(this.loginForm.value);
     this.authService.login(email, password).subscribe((isAuthenticated) => {
       if (!isAuthenticated) {
         this.showError();

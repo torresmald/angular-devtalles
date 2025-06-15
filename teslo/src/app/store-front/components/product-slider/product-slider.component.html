@@ -8,9 +8,15 @@
       <img
         [src]="image | productImage"
         alt="Producto"
-        class="w-full object-cover"
+        class="w-full object-contain max-h-[430px]"
       />
     </div>
+    } @empty {
+    <img
+      src="./assets/no-image.jpg"
+      alt="Default Image"
+      class="w-full object-cover"
+    />
     }
   </div>
   <!-- If we need pagination -->

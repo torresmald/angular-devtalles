@@ -1,15 +1,11 @@
 import { inject } from '@angular/core';
 import {
-  CanActivateFn,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
   Router,
   CanMatchFn,
   Route,
   UrlSegment,
 } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { firstValueFrom } from 'rxjs';
 
 const allowEnterAuth: CanMatchFn = async (
   route: Route,
@@ -17,13 +13,10 @@ const allowEnterAuth: CanMatchFn = async (
 ) => {
   const authService = inject(AuthService);
   const router = inject(Router);
-  const isLogged = await firstValueFrom(authService.checkStatus());
-  console.log('isLogged:', isLogged);
-  if (isLogged) {
-    console.log('NUNCA ENTRO AQUI');
-
+  const authStatus = authService.getAuthStatus();
+  if (authStatus === 'authenticated') {
     router.navigateByUrl('/');
-    return false
+    return false;
   }
   console.log('Continuo navegacion');
 

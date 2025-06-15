@@ -1,6 +1,6 @@
 import { Product } from '@/products/interfaces/product-response.interface';
 import { ProductImagePipe } from '@/products/pipes/ProductImage.pipe';
-import { AfterViewInit, Component, ElementRef, input, viewChild } from '@angular/core';
+import { AfterViewInit, Component, effect, ElementRef, input, viewChild } from '@angular/core';
 // core version + navigation, pagination modules:
 import Swiper from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -14,7 +14,7 @@ import 'swiper/css/pagination';
   templateUrl: './product-slider.component.html',
 })
 export class ProductSliderComponent implements AfterViewInit {
-  images = input.required<string[]>();
+  images = input.required<any>();
   swiperDiv = viewChild.required<ElementRef>('swiperDiv');
 
   ngAfterViewInit(): void {

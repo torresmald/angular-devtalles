@@ -8,16 +8,15 @@ export const adminDashboardRoutes: Routes = [
   {
     path: '',
     component: AdminDashboardLayoutComponent,
+    canActivate: [isAdminUser],
     children: [
       {
         path: 'products',
         component: ProductsAdminPageComponent,
-        canActivate: [isAdminUser],
       },
       {
         path: 'product/:id',
         component: ProductAdminPageComponent,
-        canActivate: [isAdminUser],
       },
       {
         path: '**',

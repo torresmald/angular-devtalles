@@ -20,6 +20,11 @@ export interface Product {
   user: User;
 }
 
+export interface FilesUpload {
+  secureUrl: string,
+  fileName: string
+}
+
 export enum Gender {
   Kid = 'kid',
   Women = 'women',

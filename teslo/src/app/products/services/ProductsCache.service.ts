@@ -24,4 +24,14 @@ export class ProductsCacheService {
   public set productsCache(value) {
     this._productsCache = value;
   }
+
+  public updateProductListChache(product: Product) {
+    const productId = product.id;
+    this._productCache.set(productId, product);
+    this._productsCache.forEach((productResponse) => {
+      productResponse.products = productResponse.products.map((currProd) => {
+        return currProd.id === productId ? product : currProd;
+      });
+    });
+  }
 }

@@ -17,7 +17,7 @@ export class AuthService {
 
   private authStatus = signal<AuthStatus>('checking');
   private user = signal<User | null>(null);
-  private token = signal<string | null>(null);
+  private token = signal<string | null>(localStorage.getItem('token'));
 
   checkStatusResource = rxResource({
     loader: () => this.checkStatus(),
@@ -31,6 +31,7 @@ export class AuthService {
 
   isAdminUser = computed(() => {
     if (!this.user()) return false;
+    if (this.getAuthStatus() !== 'authenticated') return false;
     return this.user()!.roles.includes('admin');
   });
 
@@ -44,9 +45,13 @@ export class AuthService {
         password,
       })
       .pipe(
-        map((response) =>
-          this.setResponses('authenticated', response.user, response.token)
-        ),
+        map((response) => {
+          return this.setResponses(
+            'authenticated',
+            response.user,
+            response.token
+          );
+        }),
         catchError((error: any) => {
           this.logout();
           return of(false);
@@ -77,24 +82,22 @@ export class AuthService {
   }
 
   public checkStatus(): Observable<boolean> {
-    console.log('Me llaman');
     const token = localStorage.getItem('token');
     if (!token) {
-      console.log('No hay token');
       this.logout();
       return of(false);
     }
-    console.log('Token:', token);
-
     return this.http
       .get<AuthResponse>(`${environment.API_URL}/auth/check-status`)
       .pipe(
-        tap((response) => console.log('Response check-status:', response)),
-        map((response) =>
-          this.setResponses('authenticated', response.user, response.token)
-        ),
+        map((response) => {
+          return this.setResponses(
+            'authenticated',
+            response.user,
+            response.token
+          );
+        }),
         catchError((error: any) => {
-          console.log('Error check-status:', error);
           this.logout();
           return of(false);
         })

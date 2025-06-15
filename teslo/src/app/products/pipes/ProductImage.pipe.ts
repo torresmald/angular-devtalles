@@ -6,6 +6,10 @@ import { environment } from 'src/environments/environment';
 })
 export class ProductImagePipe implements PipeTransform {
   transform(value: string | string[]): string | string[] {
+    if (typeof value === 'string' && value.startsWith('blob:')) {
+      return value;
+    }
+
     if (typeof value === 'string') {
       return `${environment.API_URL}/files/product/${value}`;
     }
@@ -13,7 +17,7 @@ export class ProductImagePipe implements PipeTransform {
     const image = value.at(0);
 
     if (!image) {
-      return './assets/images/no-image.jpg';
+      return './assets/no-image.jpg';
     }
 
     return `${environment.API_URL}/files/product/${image}`;

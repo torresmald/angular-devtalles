@@ -6,7 +6,6 @@ import {
   RouterStateSnapshot,
   Router,
 } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
 
 const isAdminUser: CanActivateFn = async (
   route: ActivatedRouteSnapshot,

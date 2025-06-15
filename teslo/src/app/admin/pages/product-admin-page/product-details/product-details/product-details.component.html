@@ -1,0 +1,166 @@
+<h1 class="text-2xl font-bold">{{ product().title }}</h1>
+<div class="divider"></div>
+
+<form
+  class="grid grid-cols-1 sm:grid-cols-2 gap-4 px-8"
+  [formGroup]="productForm"
+  (ngSubmit)="onSubmit()"
+>
+  <!-- Datos generales -->
+  <div class="flex flex-col gap-2">
+    <h2 class="text-2xl font-bold h-12">Product</h2>
+    <input
+      type="text"
+      placeholder="Title"
+      class="input input-bordered w-full"
+      formControlName="title"
+      [class.border-red-500]="formUtils.isValidField(productForm, 'title')"
+    />
+    @if (formUtils.isValidField(productForm, 'title')) {
+    <span class="text-error text-xs">{{
+      formUtils.getFieldError(productForm, "title")
+    }}</span>
+    }
+
+    <input
+      type="text"
+      placeholder="Slug"
+      class="input input-bordered w-full"
+      formControlName="slug"
+      [class.border-red-500]="formUtils.isValidField(productForm, 'slug')"
+    />
+    @if (formUtils.isValidField(productForm, 'slug')) {
+    <span class="text-error text-xs">{{
+      formUtils.getFieldError(productForm, "slug")
+    }}</span>
+    }
+    <textarea
+      class="textarea textarea-bordered"
+      placeholder="Description"
+      rows="6"
+      formControlName="description"
+      [class.border-red-500]="
+        formUtils.isValidField(productForm, 'description')
+      "
+    ></textarea>
+    @if (formUtils.isValidField(productForm, 'description')) {
+    <span class="text-error text-xs">{{
+      formUtils.getFieldError(productForm, "description")
+    }}</span>
+    }
+
+    <h2 class="text-lg font-bold">Sales data</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">Price</legend>
+        <input
+          type="number"
+          class="input"
+          placeholder="Price"
+          formControlName="price"
+          [class.border-red-500]="formUtils.isValidField(productForm, 'price')"
+        />
+        @if (formUtils.isValidField(productForm, 'price')) {
+        <span class="text-error text-xs">{{
+          formUtils.getFieldError(productForm, "price")
+        }}</span>
+        }
+      </fieldset>
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">Stock</legend>
+        <input
+          type="number"
+          class="input"
+          placeholder="Stock"
+          formControlName="stock"
+          [class.border-red-500]="formUtils.isValidField(productForm, 'stock')"
+        />
+        @if (formUtils.isValidField(productForm, 'stock')) {
+        <span class="text-error text-xs">{{
+          formUtils.getFieldError(productForm, "stock")
+        }}</span>
+        }
+      </fieldset>
+    </div>
+
+    <!-- tags -->
+    <input
+      type="text"
+      placeholder="Tags"
+      class="input input-bordered w-full"
+      formControlName="tags"
+      [class.border-red-500]="formUtils.isValidField(productForm, 'tags')"
+    />
+    @if (formUtils.isValidField(productForm, 'tags')) {
+    <span class="text-error text-xs">{{
+      formUtils.getFieldError(productForm, "tags")
+    }}</span>
+    }
+
+    <!-- Botones para el género -->
+    <div class="grid grid-cols-4 gap-2">
+      @for (gender of genders; track $index) {
+      <button
+        type="button"
+        class="btn btn-sm"
+        [class]="getGenderClass(gender)"
+        (click)="updateFormField('gender', gender)"
+        [class.border-error]="formUtils.isValidField(productForm, 'gender')"
+      >
+        {{ gender | titlecase }}
+      </button>
+      }
+    </div>
+
+    <!-- Sizes -->
+    <div class="grid grid-cols-6 gap-2">
+      @for (size of sizes; track size) {
+      <button
+        type="button"
+        class="btn btn-sm hover:btn-primary"
+        (click)="updateFormField('sizes', size)"
+        [class.btn-accent]="productForm.value.sizes.includes(size)"
+        [class.border-error]="formUtils.isValidField(productForm, 'sizes')"
+      >
+        {{ size }}
+      </button>
+      }
+    </div>
+    @if (formUtils.isValidField(productForm, 'sizes')) {
+    <span class="text-error text-xs">{{
+      formUtils.getFieldError(productForm, "sizes")
+    }}</span>
+    }
+  </div>
+
+  <!-- Imágenes -->
+  <div class="flex flex-col gap-2">
+    <div class="flex justify-end h-12">
+      <button class="btn btn-secondary" type="submit">
+        <!-- <span class="loading loading-spinner loading-sm"></span> -->
+        Save
+      </button>
+    </div>
+
+    <app-product-slider [images]="productImages()" />
+
+    <input
+      type="file"
+      multiple
+      accept="image/*"
+      class="file-input file-input-bordered w-full mt-4"
+      (change)="onFilesChanged($event)"
+    />
+  </div>
+</form>
+
+<div class="flex gap-2 justify-end my-4 mx-10">
+  @for (image of filesPreview(); track $index) {
+  <img [src]="image" alt="Image to Upload" class="w-50 h-50 object-contain" />
+  }
+</div>
+
+@if (isUpdatedProduct()) {
+<app-alert [errorMessage]="alertMessage()" errorColor="success" />
+}

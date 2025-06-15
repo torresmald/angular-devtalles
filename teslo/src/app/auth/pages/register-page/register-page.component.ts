@@ -7,10 +7,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '@/auth/services/auth.service';
+import { AlertComponent } from "../../../shared/components/alert/alert.component";
 
 @Component({
   selector: 'app-register-page',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, AlertComponent],
   templateUrl: './register-page.component.html',
 })
 export default class RegisterPageComponent {

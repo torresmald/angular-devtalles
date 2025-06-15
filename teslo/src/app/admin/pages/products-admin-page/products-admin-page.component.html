@@ -1,1 +1,32 @@
-<p>products-admin-page works!</p>,
+<h1 class="font-Montserrat text-2xl mt-4">Products List</h1>
+<h2 class="text-xl">
+  Total Products
+  <span class="text-accent">{{ productsResource.value()?.count }}</span>
+</h2>
+<div class="divider"></div>
+
+<div class="flex justify-star items-center gap-4">
+  @if (productsResource.value()) {
+  <app-pagination
+    [pages]="productsResource.value()?.pages ?? 1"
+    [currentPage]="paginationService.currentPage()"
+  />
+  <select
+    class="select w-[10%]"
+    (change)="limit.set(+selectValue.value)"
+    #selectValue
+  >
+    <option>--LIMIT--</option>
+    <option value="10">10</option>
+    <option value="30">30</option>
+    <option value="50">50</option>
+    <option value="100">100</option>
+  </select>
+  }
+</div>
+
+@if (productsResource.value()?.products) {
+<app-products-table [products]="productsResource.value()!.products" />
+} @else {
+<p>No hay productos</p>
+}
